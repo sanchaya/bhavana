@@ -5,7 +5,7 @@
 <title>ಜಯಂತ ಕಾಯ್ಕಿಣಿ ಸಂಪಾದಕತ್ವದ ಭಾವನಾ ಕನ್ನಡ ಮಾಸಿಕದ ಸಂಚಿಕೆಗಳು</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="ಜಯಂತ ಕಾಯ್ಕಿಣಿ ಸಂಪಾದಕತ್ವದ ಭಾವನಾ ಕನ್ನಡ ಮಾಸಿಕದ ಸಂಚಿಕೆಗಳ ಸುಲಭ ಲಭ್ಯತೆಗೆ ಡಿಜಿಟಲ್ ಸಂಚಯವನ್ನು ಸೃಷ್ಟಿಸಲಾಗಿದೆ‍!">
-<meta name="portal-design" content="6">
+<meta name="portal-design" content="8">
 <meta name="author" content="ವಿಜಯ್ ಸಂಕೇಶ್ವರ">
 <link rel="canonical" href="https://bhavana.sanchaya.net/">
 <meta property="og:title" content="ಜಯಂತ ಕಾಯ್ಕಿಣಿ ಸಂಪಾದಕತ್ವದ ಭಾವನಾ ಕನ್ನಡ ಮಾಸಿಕದ ಸಂಚಿಕೆಗಳು">
@@ -27,9 +27,10 @@
 
 <header class="top">
   <div class="brand"><a class="logo" href="./" aria-label="ಜಯಂತ ಕಾಯ್ಕಿಣಿ ಸಂಪಾದಕತ್ವದ ಭಾವನಾ ಕನ್ನಡ ಮಾಸಿಕದ ಸಂಚಿಕೆಗಳು"><img src="./img/logo.png" alt="" height="40"></a>
-  <h1>ಜಯಂತ ಕಾಯ್ಕಿಣಿ ಸಂಪಾದಕತ್ವದ ಭಾವನಾ ಕನ್ನಡ ಮಾಸಿಕದ ಸಂಚಿಕೆಗಳು</h1></div>
+  <h1>ಜಯಂತ ಕಾಯ್ಕಿಣಿ ಸಂಪಾದಕತ್ವದ ಭಾವನಾ ಕನ್ನಡ ಮಾಸಿಕದ ಸಂಚಿಕೆಗಳು</h1><div class="orgs"></div></div>
   <p class="tagline"></p>
   <section class="about"><h2>About this collection</h2><p>ಜಯಂತ ಕಾಯ್ಕಿಣಿ ಸಂಪಾದಕತ್ವದ ಭಾವನಾ ಕನ್ನಡ ಮಾಸಿಕದ ಸಂಚಿಕೆಗಳ ಸುಲಭ ಲಭ್ಯತೆಗೆ ಡಿಜಿಟಲ್ ಸಂಚಯವನ್ನು ಸೃಷ್ಟಿಸಲಾಗಿದೆ‍!</p></section>
+  
 </header>
 
 <div class="bar">
@@ -40,6 +41,7 @@
   </div>
   <div class="pills" id="pills"><button type="button" class="pill" data-year="any" aria-pressed="true">All</button><button type="button" class="pill" data-year="2000" aria-pressed="false">2000</button><button type="button" class="pill" data-year="2001" aria-pressed="false">2001</button></div>
   <div class="pills" id="vols"></div>
+  <div class="pills" id="langs">__LANGS__</div>
   <div class="pills" id="topics"></div>
   <p id="count" class="count" aria-live="polite">15 / 15 items</p>
 </div>
@@ -126,7 +128,7 @@
 
 <footer>
   
-  <p class="credit">Published by ವಿಜಯ್ ಸಂಕೇಶ್ವರ.</p>
+  <p class="credit">Published by <a href="https://sanchaya.org" target="_blank" rel="noopener">Sanchaya</a> | <a href="https://sanchifoundation.org" target="_blank" rel="noopener">Sanchi Foundation</a> in collaboration with <a href="https://research.servantsofknowledge.in" target="_blank" rel="noopener">Servants of Knowledge</a>.</p>
   <p class="fine">Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International License. Each issue has its own copyright/license. Please read the metadata on the issue page.</p>
   <p class="sok"><img src="./img/sok-logo.png" alt=""><span>A <a href="https://archive.org/details/ServantsOfKnowledge" target="_blank" rel="noopener">Servants of Knowledge</a> Initiative</span></p>
 </footer>
@@ -139,7 +141,7 @@
   var FRAME = false, T = {"items":"items"};
   var $ = function (s) { return document.querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-  var q = $('#q'), pills = $$('#pills .pill'), tpills = $$('#topics .pill'), vpills = $$('#vols .pill'), year = 'any', topic = 'any', vol = 'any', more = $('#more');
+  var q = $('#q'), pills = $$('#pills .pill'), tpills = $$('#topics .pill'), vpills = $$('#vols .pill'), lpills = $$('#langs .pill'), year = 'any', topic = 'any', vol = 'any', lang = 'any', more = $('#more');
   var pages = more ? +more.dataset.pages : 1, next = 1, total = parseInt($('#count').textContent, 10) || 0;
   var norm = function (s) { return s.normalize('NFC').toLowerCase(); };
   var cards = function () { return $$('.card'); };
@@ -164,16 +166,16 @@
   var busy = false;
   function apply() {
     var terms = norm(q.value).split(/\s+/).filter(Boolean), me = ++token;
-    if (year === 'any' && topic === 'any' && vol === 'any' && !terms.length) {
+    if (year === 'any' && topic === 'any' && vol === 'any' && lang === 'any' && !terms.length) {
       cards().forEach(function (c) { c.hidden = false; });
       $('#count').textContent = total + ' / ' + total + ' ' + T.items; $('#none').hidden = true; watch();
       return;
     }
     getIndex().catch(function () {
       // search.json missing (portal built by an older builder): filter what is on the page by year/text.
-      return cards().map(function (c) { return [idOf(c), c.dataset.year, c.dataset.q || c.textContent.normalize('NFC').toLowerCase(), 0, [], c.dataset.vol || '']; });
+      return cards().map(function (c) { return [idOf(c), c.dataset.year, c.dataset.q || c.textContent.normalize('NFC').toLowerCase(), 0, [], c.dataset.vol || '', c.dataset.lang || '']; });
     }).then(function (idx) {
-      var hit = idx.filter(function (r) { return (year === 'any' || r[1] === year) && (topic === 'any' || (r[4] || []).indexOf(topic) > -1) && (vol === 'any' || r[5] === vol) && terms.every(function (t) { return r[2].indexOf(t) > -1; }); });
+      var hit = idx.filter(function (r) { return (year === 'any' || r[1] === year) && (topic === 'any' || (r[4] || []).indexOf(topic) > -1) && (vol === 'any' || r[5] === vol) && (lang === 'any' || r[6] === lang) && terms.every(function (t) { return r[2].indexOf(t) > -1; }); });
       var need = {}; hit.forEach(function (r) { need[r[3]] = 1; });
       return Promise.all(Object.keys(need).map(load)).then(function () {
         if (me !== token) return;
@@ -188,6 +190,13 @@
     p.addEventListener('click', function () {
       vol = p.dataset.vol;
       vpills.forEach(function (x) { x.setAttribute('aria-pressed', x === p ? 'true' : 'false'); });
+      apply();
+    });
+  });
+  lpills.forEach(function (p) {
+    p.addEventListener('click', function () {
+      lang = p.dataset.lang;
+      lpills.forEach(function (x) { x.setAttribute('aria-pressed', x === p ? 'true' : 'false'); });
       apply();
     });
   });
@@ -218,7 +227,7 @@
 
   // Auto-load the next page when the end of the list nears (only while nothing is filtered).
   var io = more && 'IntersectionObserver' in window ? new IntersectionObserver(function (e) {
-    if (e[0].isIntersecting && year === 'any' && topic === 'any' && vol === 'any' && !q.value.trim()) loadNext().then(watch);
+    if (e[0].isIntersecting && year === 'any' && topic === 'any' && vol === 'any' && lang === 'any' && !q.value.trim()) loadNext().then(watch);
   }, { rootMargin: '800px' }) : null;
   function watch() { if (io && more && more.isConnected) { io.unobserve(more); io.observe(more); } }
   if (io) watch(); else if (more) { while (next < pages) loadNext(); } // no IntersectionObserver: load everything
@@ -251,7 +260,7 @@
     });
     var step = function (d) {
       var l = items(), n = l[cur + d];
-      if (n) show(n); else if (d > 0 && next < pages && year === 'any' && topic === 'any' && vol === 'any' && !q.value.trim()) loadNext().then(function () { var m = items()[cur + d]; if (m) show(m); });
+      if (n) show(n); else if (d > 0 && next < pages && year === 'any' && topic === 'any' && vol === 'any' && lang === 'any' && !q.value.trim()) loadNext().then(function () { var m = items()[cur + d]; if (m) show(m); });
     };
     $('#vprev').addEventListener('click', function () { step(-1); });
     $('#vnext').addEventListener('click', function () { step(1); });
